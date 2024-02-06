@@ -53,10 +53,10 @@ const userQuestion = () =>
         answer === "" ? "Please answer the question!" : true,
     },
     {
-      type: "checkbox",
+      type: "list",
       name: "license",
       message: "which of these license is applicable to your repo?",
-      choices: ["APACHE", "TOMCAST", "MIDDLEWARE", "MIT", "NONE"],
+      choices: ['GNU', 'Mozilla', 'Apache', 'MIT', 'Boost'],
     },
     {
       type: "input",
@@ -93,59 +93,62 @@ const userQuestion = () =>
       },
     },
   ]);
-  const generateHTML = (answers) =>
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <style>
-    .list-group-item {
-      font-size: 18px; /* Adjust the font size as needed */
-    }
-  </style>
-  <title>Readme Generator</title>
-</head>
-<body>
-  <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold title">${answers.title}</h1>
-    <h3 class="col-md-8 fs-4">Description</h3> 
-    <h2 ${answers.description}.</h2>
-    <p class="col-md-8 fs-4">Table Of Content <br></p>
-    <ul class="list-group">
-      <li class="list-group-item"><a href ='#title'>- Title</a></li>
-      <li class="list-group-item"><a href ='#overview'>- Overview</a></li>
-      <li class="list-group-item"><a href ='#description'>- Description</a></li>
-      <li class="list-group-item"><a href ='#installation'>- Installation</a></li>
-      <li class="list-group-item"><a href ='#screenshots'>- Screenshots</a></li>
-      <li class="list-group-item"><a href ='#usage'>- Usage</a></li>
-      <li class="list-group-item"><a href ='#license'>- License</a></li>
-      <li class="list-group-item"><a href ='#contributors'>- Contributors</a></li>
-      <li class="list-group-item"><a href ='#tests'>- Tests</a></li>
-      <li class="list-group-item"><a href ='#questions'>- Questions</a></li>
-    </ul>
-    <h3 class="col-md-8 fs-4" id='installation'>Installation</h3>
-    <p>${answers.installation}</p>
-    <h3 class="col-md-8 fs-4" id='screenshot'>Screenshots</h3>
-    <p>${answers.screenshots}</p>
-    <h3 class="col-md-8 fs-4" id='usage'>Usage</h3>
-    <p>${answers.usage}.</p>
-    <h3 class="col-md-8 fs-4" id='contributors'>Contributors</h3>
-    <p>${answers.contributors}</p>
-    <h3 class="col-md-8 fs-4 " id='tests'>Tests</h3>
-    <p>${answers.tests}</p>
-    <h3 class="col-md-8 fs-4" id='questions'>Questions</h3>
-    <p>${answers.questions}</p>
-    <h3 class="col-md-8 fs-4" id='license'>License</h3>
-    <p>${answers.license}</p>
 
-
-  </div>
-</div>
-</body>
-</html>`;
+  
+  const generateHTML = (answers) => 
+      `<!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <style>
+          .list-group-item {
+            font-size: 18px; /* Adjust the font size as needed */
+          }
+        </style>
+        <title>Readme Generator</title>
+      </head>
+      <body>
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold" id='title'>${answers.title}</h1>
+          <h3 class="col-md-8 fs-4" id='license'>License</h3> 
+          <p>${answers.license}</p>
+          <h3 class="col-md-8 fs-4" id='description'>Description</h3> 
+          <p> ${answers.description}</p>
+          <h3 class="col-md-8 fs-4">Table Of Content <br></h3>
+          <ul class="list-group">
+            <li class="list-group-item"><a href ='#title'style="text-decoration: none;" >- Title</a></li>
+            <li class="list-group-item"><a href ='#overview'style="text-decoration: none;">- Overview</a></li>
+            <li class="list-group-item"><a href ='#description'style="text-decoration: none;">- Description</a></li>
+            <li class="list-group-item"><a href ='#installation'style="text-decoration: none;">- Installation</a></li>
+            <li class="list-group-item"><a href ='#screenshots'style="text-decoration: none;">- Screenshots</a></li>
+            <li class="list-group-item"><a href ='#usage'style="text-decoration: none;">- Usage</a></li>
+            <li class="list-group-item"><a href ='#license'style="text-decoration: none;">- License</a></li>
+            <li class="list-group-item"><a href ='#contributors'style="text-decoration: none;">- Contributors</a></li>
+            <li class="list-group-item"><a href ='#tests'style="text-decoration: none;">- Tests</a></li>
+            <li class="list-group-item"><a href ='#questions'style="text-decoration: none;">- Questions</a></li>
+          </ul>
+          <h3 class="col-md-8 fs-4" id='installation'>#Installation</h3>
+          <p>${answers.installation}</p>
+          <h3 class="col-md-8 fs-4" id='screenshot'>#Screenshots</h3>
+          <p>## Dashboard Overview: ${answers.screenshots}</p>
+          <h3 class="col-md-8 fs-4" id='usage'>Usage</h3>
+          <p>${answers.usage}</p>
+          <h3 class="col-md-8 fs-4" id='contributors'>#Contributors</h3>
+          <p>${answers.contributor}</p>
+          <h3 class="col-md-8 fs-4 " id='tests'>#Tests</h3>
+          <p>${answers.test}</p>
+          <h3 class="col-md-8 fs-4" id='questions'>#Questions</h3>
+          <p> If you're interested in sharing ideas, experiences, or collaborating on projects, please feel free to get in touch via email at ${answers.github} or email me at ${answers.email}</p>
+          <h3 class="col-md-8 fs-4" id='license'>#License</h3>
+          <p>This project is licensed under the ${answers.license}</p>
+        </div>
+      </div>
+      </body>
+      </html>`;
+  
 // function to write README file, method which took 2 parameter, it does this by calling fs.writeFile()
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, generateMarkdown(data), (err) => {
@@ -156,8 +159,7 @@ function writeToFile(fileName, data) {
     }
   });
 }
-// function to initialize program
-// function to initialize program
+
 function init() {
   // Prompt the user for input
   userQuestion()
@@ -175,8 +177,6 @@ function init() {
       console.error("An error occurred:", error);
     });
 }
-
-
 
 // function call to initialize program
 init();
